@@ -1,0 +1,11 @@
+bin = [
+  { name = "main", path = "src/main.rs" },
+  { name = "day_1", path = "src/2025/day_1.rs" },
+]
+
+[package]
+name = "Advent-of-code"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
