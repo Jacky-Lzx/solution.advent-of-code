@@ -49,7 +49,7 @@ fn main() {
     let contents = read_to_string("assets/2025/day_5.input").unwrap();
     // let contents = read_to_string("assets/2025/test.input").unwrap();
 
-    let contents = contents.split('\n').collect::<Vec<&str>>();
+    let contents = contents.lines().collect::<Vec<&str>>();
 
     let mut ranges = vec![];
     let mut ids = vec![];

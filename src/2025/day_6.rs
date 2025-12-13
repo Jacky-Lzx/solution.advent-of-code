@@ -1,7 +1,7 @@
 use std::fs::read_to_string;
 
 fn part_1(contents: &[&str]) {
-    let len = contents.len() - 1;
+    let len = contents.len();
 
     let operands = contents[0..len - 1]
         .iter()
@@ -45,7 +45,7 @@ fn part_1(contents: &[&str]) {
 }
 
 fn part_2(contents: &[&str]) {
-    let len = contents.len() - 1;
+    let len = contents.len();
 
     let mut operands_new = vec![vec![]];
     let len_operands = contents[0..len - 1].iter().map(|&x| x.len()).max().unwrap();
@@ -109,7 +109,7 @@ fn main() {
     let contents = read_to_string("assets/2025/day_6.input").unwrap();
     // let contents = read_to_string("assets/2025/test.input").unwrap();
 
-    let contents = contents.split('\n').collect::<Vec<&str>>();
+    let contents = contents.lines().collect::<Vec<&str>>();
 
     part_1(&contents);
     part_2(&contents);
