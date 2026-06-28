@@ -3,33 +3,7 @@ use std::{
     fs,
 };
 
-#[derive(Eq, Hash, PartialEq, Debug, Clone, Copy)]
-struct Pos {
-    x: i32,
-    y: i32,
-}
-
-impl std::ops::Sub for Pos {
-    type Output = Pos;
-
-    fn sub(self, rhs: Self) -> Self::Output {
-        Pos {
-            x: self.x - rhs.x,
-            y: self.y - rhs.y,
-        }
-    }
-}
-
-impl std::ops::Add for Pos {
-    type Output = Pos;
-
-    fn add(self, rhs: Self) -> Self::Output {
-        Pos {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
-        }
-    }
-}
+use advent_of_code::utils::pos::Pos;
 
 fn in_bounds(pos: &Pos, x_len: usize, y_len: usize) -> bool {
     pos.x >= 0 && (pos.x as usize) < x_len && pos.y >= 0 && (pos.y as usize) < y_len

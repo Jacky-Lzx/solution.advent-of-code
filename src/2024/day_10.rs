@@ -1,29 +1,7 @@
 use anyhow::{Context, Result};
 use std::{collections::HashSet, fs};
 
-#[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
-struct Pos {
-    x: i32,
-    y: i32,
-}
-
-impl std::ops::Add for Pos {
-    type Output = Self;
-
-    fn add(self, other: Self) -> Self {
-        Self {
-            x: self.x + other.x,
-            y: self.y + other.y,
-        }
-    }
-}
-
-const DIRECTIONS: [Pos; 4] = [
-    Pos { x: 0, y: -1 }, // Up
-    Pos { x: 0, y: 1 },  // Down
-    Pos { x: -1, y: 0 }, // Left
-    Pos { x: 1, y: 0 },  // Right
-];
+use advent_of_code::utils::pos::{DIRECTIONS, Pos};
 
 enum Measure {
     Single(HashSet<Pos>),

@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "Advent-of-code"
+name = "advent-of-code"
 version = "0.1.0"
 dependencies = [
  "anyhow",
