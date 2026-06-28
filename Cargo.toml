@@ -9,6 +9,7 @@ bin = [
   { name = "2025_day_7", path = "src/2025/day_7.rs" },
   { name = "2025_day_8", path = "src/2025/day_8.rs" },
   { name = "2025_day_9", path = "src/2025/day_9.rs" },
+  { name = "2025_day_10", path = "src/2025/day_10.rs" },
 
   { name = "day_1", path = "src/2024/day_1.rs" },
   { name = "day_2", path = "src/2024/day_2.rs" },
@@ -19,8 +20,7 @@ bin = [
   { name = "day_7", path = "src/2024/day_7.rs" },
   { name = "day_8", path = "src/2024/day_8.rs" },
   { name = "day_9", path = "src/2024/day_9.rs" },
-
-  { name = "day_10", path = "src/2025/day_10.rs" },
+  { name = "day_10", path = "src/2024/day_10.rs" },
 ]
 
 [package]
