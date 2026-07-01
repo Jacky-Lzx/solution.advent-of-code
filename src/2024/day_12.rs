@@ -15,7 +15,7 @@ fn get_upper_or_left(garden: &[Vec<char>], current: Pos, dir_idx: usize, size: (
 
     let idxes = idx_map[dir_idx];
 
-    let new_1 = current + DIRECTIONS[idxes.0];
+    let new_1 = current + DIRECTIONS[idxes.0].to_pos();
 
     if new_1.x < 0
         || new_1.y < 0
@@ -26,7 +26,7 @@ fn get_upper_or_left(garden: &[Vec<char>], current: Pos, dir_idx: usize, size: (
         return 1;
     }
 
-    let new_2 = new_1 + DIRECTIONS[idxes.1];
+    let new_2 = new_1 + DIRECTIONS[idxes.1].to_pos();
 
     if new_2.x < 0
         || new_2.y < 0
@@ -67,7 +67,7 @@ fn bfs(
         visited[current.x as usize][current.y as usize] = true;
 
         for (dir_idx, dir) in DIRECTIONS.iter().enumerate() {
-            let next = current + *dir;
+            let next = current + dir.to_pos();
 
             if next.x < 0 || next.x >= x_len || next.y < 0 || next.y >= y_len {
                 count += match count_type {

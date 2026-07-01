@@ -33,7 +33,7 @@ fn score(mountain: &[Vec<u32>], start: Pos, is_distinct: bool) -> Result<u32> {
         }
 
         for dir in DIRECTIONS {
-            let next = head + dir;
+            let next = head + dir.to_pos();
 
             if next.x < 0
                 || next.y < 0

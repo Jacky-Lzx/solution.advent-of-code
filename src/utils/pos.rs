@@ -25,9 +25,44 @@ impl std::ops::Sub for Pos {
     }
 }
 
-pub const DIRECTIONS: [Pos; 4] = [
-    Pos { x: 0, y: -1 }, // Up
-    Pos { x: 1, y: 0 },  // Right
-    Pos { x: -1, y: 0 }, // Left
-    Pos { x: 0, y: 1 },  // Down
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+
+pub const DIRECTIONS: [Direction; 4] = [
+    Direction::Up,
+    Direction::Down,
+    Direction::Left,
+    Direction::Right,
 ];
+
+impl Direction {
+    pub fn to_pos(&self) -> Pos {
+        match self {
+            Direction::Up => Pos { x: -1, y: 0 },
+            Direction::Down => Pos { x: 1, y: 0 },
+            Direction::Left => Pos { x: 0, y: -1 },
+            Direction::Right => Pos { x: 0, y: 1 },
+        }
+    }
+}
+
+impl Pos {
+    pub fn to_direction(&self) -> Option<Direction> {
+        match (self.x / self.x.abs(), self.y / self.y.abs()) {
+            (-1, 0) => Some(Direction::Up),
+            (1, 0) => Some(Direction::Down),
+            (0, -1) => Some(Direction::Left),
+            (0, 1) => Some(Direction::Right),
+            _ => None,
+        }
+    }
+}
+
+pub fn in_bound(pos: &Pos, sizes: (usize, usize)) -> bool {
+    pos.x >= 0 && pos.x < sizes.0 as i32 && pos.y >= 0 && pos.y < sizes.1 as i32
+}
