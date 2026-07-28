@@ -81,7 +81,7 @@ fn bfs(map: &[Vec<Status>], start_pos: Pos, end_pos: Pos) -> Result<i32> {
     anyhow::bail!("No path found from {:?} to {:?}", start_pos, end_pos);
 }
 
-fn part_1(bytes_pos: &[Pos], size: i32, num: i32) -> Result<()> {
+fn solve(bytes_pos: &[Pos], size: i32, num: i32) -> Result<i32> {
     let mut map = vec![vec![Status::Empty; size as usize]; size as usize];
 
     bytes_pos.iter().take(num as usize).for_each(|pos| {
@@ -91,45 +91,40 @@ fn part_1(bytes_pos: &[Pos], size: i32, num: i32) -> Result<()> {
         map[y][x] = Status::Corrupted;
     });
 
-    let num = bfs(
+    bfs(
         &map,
         Pos { x: 0, y: 0 },
         Pos {
             x: size - 1,
             y: size - 1,
         },
-    )?;
+    )
+}
 
-    println!("Part 1: {}", num);
+fn part_1(bytes_pos: &[Pos], size: i32, num: i32) -> Result<()> {
+    let ans = solve(bytes_pos, size, num)?;
+
+    println!("Part 1: {}", ans);
 
     Ok(())
 }
 
-fn part_2(bytes_pos: &[Pos], size: i32, num: i32) -> Result<()> {
-    let mut map = vec![vec![Status::Empty; size as usize]; size as usize];
+fn part_2(bytes_pos: &[Pos], size: i32) -> Result<()> {
+    let (mut left, mut right) = (0, bytes_pos.len() as i32); // [left, right)
 
-    for pos in bytes_pos.iter() {
-        let x = pos.x as usize;
-        let y = pos.y as usize;
+    while left < right {
+        let mid = (left + right) / 2;
 
-        map[y][x] = Status::Corrupted;
-
-        if bfs(
-            &map,
-            Pos { x: 0, y: 0 },
-            Pos {
-                x: size - 1,
-                y: size - 1,
-            },
-        )
-        .is_err()
-        {
-            println!("Part 2: {{{}, {}}}", pos.x, pos.y);
-            return Ok(());
+        if solve(bytes_pos, size, mid).is_err() {
+            right = mid;
+        } else {
+            left = mid + 1;
         }
     }
 
-    println!("Part 2: {}", num);
+    let byte = bytes_pos.get(left as usize - 1).unwrap();
+
+    println!("Part 2: {},{}", byte.x, byte.y);
 
     Ok(())
 }
@@ -156,7 +151,7 @@ fn main() -> Result<()> {
     // println!("{:?}", bytes_pos);
 
     part_1(&bytes_pos, size, num)?;
-    part_2(&bytes_pos, size, num)?;
+    part_2(&bytes_pos, size)?;
 
     Ok(())
 }
