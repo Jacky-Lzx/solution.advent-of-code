@@ -4,6 +4,17 @@ pub struct Pos {
     pub y: i32,
 }
 
+impl std::ops::Mul<i32> for Pos {
+    type Output = Self;
+
+    fn mul(self, rhs: i32) -> Self::Output {
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+        }
+    }
+}
+
 impl std::ops::Add for Pos {
     type Output = Self;
 
